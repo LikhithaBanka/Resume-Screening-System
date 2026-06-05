@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Analysis Results</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Resume Analysis Results</h1>
+
+    {% for result in results %}
+
+    <div class="card">
+
+        <h2>{{ result.job }}</h2>
+
+        <p class="score">
+            Match Score: {{ result.score }}%
+        </p>
+
+        <h3 class="matched">✅ Matched Skills</h3>
+
+        {% if result.matched|length > 0 %}
+        <ul>
+            {% for skill in result.matched %}
+            <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>None</p>
+        {% endif %}
+
+        <h3 class="missing">❌ Missing Skills</h3>
+
+        {% if result.missing|length > 0 %}
+        <ul>
+            {% for skill in result.missing %}
+            <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>None</p>
+        {% endif %}
+
+    </div>
+
+    {% endfor %}
+
+</body>
+</html>
